@@ -62,52 +62,85 @@ const Style = () => {
         }
       }
 
-      /* ==================================
-         稳健的赛博霓虹播放器 (Static Neon Glow)
-         ================================== */
+     /* ================================== 
+     1. 定义蹦迪动画 (RGB呼吸灯) 
+     ================================== */
+  @keyframes disco-glow {
+    0% { box-shadow: 0 0 10px #ff0055, 0 0 20px #ff0055; border-color: #ff0055; }
+    25% { box-shadow: 0 0 10px #0055ff, 0 0 20px #0055ff; border-color: #0055ff; }
+    50% { box-shadow: 0 0 10px #00ff55, 0 0 20px #00ff55; border-color: #00ff55; }
+    75% { box-shadow: 0 0 10px #ffdd00, 0 0 20px #ffdd00; border-color: #ffdd00; }
+    100% { box-shadow: 0 0 10px #ff0055, 0 0 20px #ff0055; border-color: #ff0055; }
+  }
 
-      /* 1. 针对 APlayer (Meting) 的核心容器 */
-      .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body,
-      .aplayer-narrow .aplayer-body {
-        border-radius: 50px !important; /* 强制胶囊圆角 */
-        border: none !important;        /* 移除边框 */
-        /* 核心：稳健的霓虹光晕 - 冰蓝色 */
-        box-shadow: 0 0 10px rgba(79, 101, 240, 0.4), 
-                    0 0 25px rgba(79, 101, 240, 0.2) !important;
-        background: rgba(255, 255, 255, 0.95) !important; /* 微透背景 */
-        transition: all 0.3s ease !important;
-        z-index: 9999 !important;
-      }
+  /* ================================== 
+     2. APlayer 核心胶囊样式 
+     ================================== */
+  .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body,
+  .aplayer-narrow .aplayer-body {
+    border-radius: 50px !important;
+    border: 2px solid transparent !important; /* 预留给边框颜色变化 */
+    background: rgba(255, 255, 255, 0.9) !important;
+    transition: all 0.3s ease !important;
+    z-index: 9999 !important;
+    
+    /* 核心：调用上面的蹦迪动画，2秒循环一次 */
+    animation: disco-glow 3s infinite linear !important;
+  }
 
-      /* 2. 鼠标悬停交互 */
-      .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body:hover {
-        transform: translateX(-20px); 
-        box-shadow: 0 0 15px rgba(79, 101, 240, 0.6), 
-                    0 0 35px rgba(79, 101, 240, 0.3) !important;
-      }
+  /* 悬停时稍微放大，停止乱动，方便点击 */
+  .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body:hover {
+    transform: scale(1.05);
+    background: #fff !important;
+  }
 
-      /* 3. 封面变圆 */
-      .aplayer.aplayer-fixed.aplayer-narrow .aplayer-pic {
-        border-radius: 50% !important;
-        margin: 2px !important;
-        box-shadow: 0 0 5px rgba(0,0,0,0.2) !important;
-      }
+  /* ================================== 
+     3. 歌词样式 (左移 + 加粗 + 霓虹字) 
+     ================================== */
+  .aplayer-lrc {
+    /* 强制把歌词容器往左边拉，靠近播放器主体 */
+    left: 80px !important; 
+    right: auto !important; 
+    width: auto !important;
+    text-align: left !important;
+    text-shadow: 0 0 2px rgba(0,0,0,0.8) !important; /* 增加文字黑色描边，防看不清 */
+    margin-bottom: 3px !important; /* 稍微调整位置 */
+  }
 
-      /* 4. 暗黑模式适配 (琥珀金光) */
-      @media (prefers-color-scheme: dark) {
-        .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body {
-          background: rgba(26, 26, 26, 0.95) !important;
-          box-shadow: 0 0 10px rgba(251, 191, 36, 0.3), 
-                      0 0 25px rgba(251, 191, 36, 0.15) !important;
-        }
-        .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body:hover {
-          box-shadow: 0 0 15px rgba(251, 191, 36, 0.5), 
-                      0 0 35px rgba(251, 191, 36, 0.25) !important;
-        }
-        .aplayer .aplayer-info .aplayer-music .aplayer-title {
-          color: #eee !important;
-        }
-      }
+  /* 具体每一行歌词 */
+  .aplayer-lrc-contents p {
+    font-size: 16px !important;     /* 字号加大 */
+    font-weight: 800 !important;    /* 字体特粗 */
+    color: #fff !important;         /* 纯白字 */
+    letter-spacing: 1px !important; /* 字间距稍微拉开一点 */
+    
+    /* 这里的文字也给点光晕 */
+    text-shadow: 0 0 5px #0055ff, 0 0 10px #0055ff !important;
+  }
+  
+  /* 当前播放的那一句歌词 */
+  .aplayer-lrc-contents p.aplayer-lrc-current {
+    color: #ffdd00 !important;      /* 高亮色：金色 */
+    transform: scale(1.1) !important; /* 当前句稍微放大 */
+  }
+
+  /* ================================== 
+     4. 封面变圆 
+     ================================== */
+  .aplayer.aplayer-fixed.aplayer-narrow .aplayer-pic {
+    border-radius: 50% !important;
+    margin: 2px !important;
+    box-shadow: 0 0 5px rgba(0,0,0,0.2) !important;
+  }
+
+  /* ================================== 
+     5. 暗黑模式适配 
+     ================================== */
+  @media (prefers-color-scheme: dark) {
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body {
+      background: rgba(30, 30, 30, 0.95) !important;
+    }
+  }
     `}</style>
   )
 }
