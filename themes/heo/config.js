@@ -27,10 +27,10 @@ const CONFIG = {
   HEO_HERO_COVER_TITLE: '随便逛逛',
 
   // 英雄区显示三个置顶分类
-  HEO_HERO_CATEGORY_1: { title: '必看精选', url: '/tag/必看精选' },
-  HEO_HERO_CATEGORY_2: { title: '热门文章', url: '/tag/热门文章' },
-  HEO_HERO_CATEGORY_3: { title: '实用教程', url: '/tag/实用教程' },
-  HEO_HERO_CATEGORY_4: { title: '科技资讯', url: '/tag/科技资讯' },
+  HEO_HERO_CATEGORY_1: { title: '科技资讯', url: '/tag/科技资讯' },
+  HEO_HERO_CATEGORY_2: { title: '学习教程', url: '/tag/学习教程' },
+  HEO_HERO_CATEGORY_3: { title: '实用工具', url: '/tag/实用工具' },
+ 
   // 英雄区右侧推荐文章标签, 例如 [推荐] , 最多六篇文章; 若留空白''，则推荐最近更新文章
   HEO_HERO_RECOMMEND_POST_TAG: '',
   HEO_HERO_RECOMMEND_POST_SORT_BY_UPDATE_TIME: false, // 推荐文章排序，为`true`时将强制按最后修改时间倒序
