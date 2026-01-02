@@ -21,7 +21,7 @@ const CONFIG = {
   HEO_HERO_TITLE_2: '美好的事情即将发生🚀',
   HEO_HERO_TITLE_3: 'by源宝',
   HEO_HERO_TITLE_4: '推荐阅读',
-  HEO_HERO_TITLE_5: 'NotionNext4.0 轻松定制主题',
+  HEO_HERO_TITLE_5: '天高任鸟飞，海阔凭鱼跃',
   HEO_HERO_TITLE_LINK: 'https://github.com/Babyy8',
   // 英雄区遮罩文字
   HEO_HERO_COVER_TITLE: '随便逛逛',
